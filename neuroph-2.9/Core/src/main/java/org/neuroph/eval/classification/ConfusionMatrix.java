@@ -99,7 +99,7 @@ public class ConfusionMatrix {
     }
 
     public int getTruePositive(int clsIdx) {
-        return (int) values[clsIdx][clsIdx];
+        return values[clsIdx][clsIdx];
     }
 
     public int getTrueNegative(int clsIdx) {

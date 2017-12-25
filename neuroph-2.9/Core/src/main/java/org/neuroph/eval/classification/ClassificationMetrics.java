@@ -155,7 +155,7 @@ public final class ClassificationMetrics {
      */
     private double getFMeasure(int beta) {
         double f = ((beta * beta + 1) * getPrecision() * getSensitivity())
-                / (double)(beta * beta * getPrecision() + getSensitivity());
+                / (beta * beta * getPrecision() + getSensitivity());
         if (Double.isNaN(f))
             return 0;
         else
