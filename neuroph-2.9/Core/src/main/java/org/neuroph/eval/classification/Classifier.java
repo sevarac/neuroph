@@ -13,9 +13,9 @@ import org.neuroph.util.plugins.PluginBase;
  * Classifier plugin for neurla networks
  * @author zoran
  */
-public class Classifier extends PluginBase {
+class Classifier extends PluginBase {
     
-    double threshold = 0.5;
+    private double threshold = 0.5;
     
     public String classify(double[] pattern) {
         NeuralNetwork<?> nnet = getParentNetwork();

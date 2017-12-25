@@ -17,15 +17,15 @@ import java.util.List;
  */
 public final class ClassificationMetrics {
 
-    double truePositive;
-    double trueNegative;    
-    double falsePositive;
-    double falseNegative;
+    private double truePositive;
+    private double trueNegative;
+    private double falsePositive;
+    private double falseNegative;
     double correlationCoefficient;
 
-    double total;
+    private double total;
     
-    String classLabel; // where is this used?
+    private String classLabel; // where is this used?
     
     
    /**
@@ -37,7 +37,7 @@ public final class ClassificationMetrics {
     * @param falsePositive
     * @param falseNegative
     */
-    public ClassificationMetrics(int truePositive, int trueNegative, int falsePositive, int falseNegative) {
+   private ClassificationMetrics(int truePositive, int trueNegative, int falsePositive, int falseNegative) {
         this.truePositive = truePositive;
         this.trueNegative = trueNegative;
         this.falsePositive = falsePositive;
@@ -53,7 +53,7 @@ public final class ClassificationMetrics {
         return classLabel;
     }
 
-    public void setClassLabel(String classLabel) {
+    private void setClassLabel(String classLabel) {
         this.classLabel = classLabel;
     }
         
@@ -94,7 +94,7 @@ public final class ClassificationMetrics {
      * number of correctly classified positive examples divided by the total number of actual positive examples
      * @return 
      */
-    public double getSensitivity() {
+    private double getSensitivity() {
         return truePositive / (truePositive + falseNegative);
     }
     
@@ -104,8 +104,8 @@ public final class ClassificationMetrics {
 
     /**
     * Specifity , true negative rate
-    */    
-    public double getSpecificity() {
+    */
+    private double getSpecificity() {
         return trueNegative / (trueNegative + falsePositive);
     }
 
@@ -113,20 +113,20 @@ public final class ClassificationMetrics {
      * Returns total number of classifications.
      * @return total number of classifications
      */
-    public double getTotal() {
+    private double getTotal() {
         return total;
     }    
     
-    public double getFalsePositiveRate() {
+    private double getFalsePositiveRate() {
         return falsePositive / (falsePositive + trueNegative);
     }
 
     //False negative rate,
-    public double getFalseNegativeRate() {
+    private double getFalseNegativeRate() {
         return falseNegative / (falseNegative + truePositive);
     }
 
-    public double getFalseDiscoveryRate() {
+    private double getFalseDiscoveryRate() {
         return falsePositive / (truePositive + falsePositive);
     }
 
@@ -153,7 +153,7 @@ public final class ClassificationMetrics {
      * @param beta
      * @return f-score
      */
-    public double getFMeasure(int beta) {
+    private double getFMeasure(int beta) {
         double f = ((beta * beta + 1) * getPrecision() * getSensitivity())
                 / (double)(beta * beta * getPrecision() + getSensitivity());
         if (Double.isNaN(f))
@@ -190,7 +190,7 @@ public final class ClassificationMetrics {
     public String toString() {
         StringBuilder sb = new StringBuilder();
         
-        sb.append("Class: "+classLabel).append("\n");
+        sb.append("Class: ").append(classLabel).append("\n");
         sb.append("Total items: ").append(getTotal()).append("\n");        
         sb.append("True positive:").append(truePositive).append("\n");
         sb.append("True negative:").append(trueNegative).append("\n");

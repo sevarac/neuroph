@@ -49,8 +49,7 @@ public class ClassificationResult {
 
     @Override
     public String toString() {
-        String object = "ID: " + getClassIdx() + ", Output: " + getNeuronOutput();
-        return object;
+        return "ID: " + getClassIdx() + ", Output: " + getNeuronOutput();
     }
 
 
