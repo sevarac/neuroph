@@ -53,18 +53,40 @@ public class DataSetTest {
         List<String> rowsFromDataset = dataSet.stream()
                 .map(DataSetRow::toString)
                 .collect(toList());
+        int foldSize = (int) Math.ceil(dataSet.size() / 8d);
 
         List<DataSet> subsets = IntStream.range(0, 8)
-                .mapToObj(value -> dataSet.takeSubset(value * 20, value * 20 + 20))
+                .mapToObj(value -> dataSet.takeSubset(value * foldSize, value * foldSize + foldSize))
                 .collect(toList());
         List<String> rowsFromSubsets = subsets.stream()
                 .flatMap(Collection::stream)
                 .map(DataSetRow::toString)
                 .collect(toList());
 
-
         assertEquals(8, subsets.size());
         assertEquals(rowsFromDataset.size(), rowsFromSubsets.size());
+        assertTrue(rowsFromDataset.containsAll(rowsFromSubsets));
+    }
+
+    @Test
+    public void splitIntoSubsets_splitIntoEightSubsets_expectCorrectSplit() {
+        DataSet dataSet = DataSet.createFromFile(getResourceFilePath("iris_normalized.txt"), 4, 3, ",");
+        List<String> rowsFromDataset = dataSet.stream()
+                .map(DataSetRow::toString)
+                .collect(toList());
+
+        Collection<DataSet> subsets = dataSet.splitIntoSubsets(8);
+
+        long count = subsets.stream()
+                .flatMap(Collection::stream)
+                .count();
+        List<String> rowsFromSubsets = subsets.stream()
+                .flatMap(Collection::stream)
+                .map(DataSetRow::toString)
+                .collect(toList());
+
+        assertEquals(8, subsets.size());
+        assertEquals(dataSet.size(), count);
         assertTrue(rowsFromDataset.containsAll(rowsFromSubsets));
     }
 

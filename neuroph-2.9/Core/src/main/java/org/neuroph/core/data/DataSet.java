@@ -606,6 +606,18 @@ public class DataSet implements List<DataSetRow>, Serializable { // implements
         return subset;
     }
 
+    public Collection<DataSet> splitIntoSubsets(int numberOfSubsets) {
+        if (rows.size() < numberOfSubsets) {
+            throw new IllegalArgumentException("Number of subsets has to be higher or equal to dataset size.");
+        }
+
+        int subsetSize = (int) Math.ceil(rows.size() / (double) numberOfSubsets);
+
+        return IntStream.range(0, numberOfSubsets)
+                .mapToObj(value -> takeSubset(value * subsetSize, value * subsetSize + subsetSize))
+                .collect(toList());
+    }
+
     @Override
     public boolean contains(Object o) {
         return rows.contains(o);// TODO: implement equals for DataSetRow
