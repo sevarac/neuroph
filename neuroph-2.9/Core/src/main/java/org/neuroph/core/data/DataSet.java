@@ -595,7 +595,8 @@ public class DataSet implements List<DataSetRow>, Serializable { // implements
 
     public DataSet takeSubset(int startInclusive, int endExclusive) {
         int end = endExclusive > rows.size() ? rows.size() : endExclusive;
-        DataSet subset = new DataSet(endExclusive - startInclusive);
+//        TODO: figure out what is input size and where it is used
+        DataSet subset = new DataSet(inputSize);
 
         if (!rows.isEmpty()) {
             IntStream.range(startInclusive, end)
@@ -606,7 +607,7 @@ public class DataSet implements List<DataSetRow>, Serializable { // implements
         return subset;
     }
 
-    public Collection<DataSet> splitIntoSubsets(int numberOfSubsets) {
+    public List<DataSet> splitIntoSubsets(int numberOfSubsets) {
         if (rows.size() < numberOfSubsets) {
             throw new IllegalArgumentException("Number of subsets has to be higher or equal to dataset size.");
         }

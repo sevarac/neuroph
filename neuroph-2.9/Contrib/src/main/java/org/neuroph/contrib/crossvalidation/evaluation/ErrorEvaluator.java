@@ -1,15 +1,15 @@
-package org.neuroph.contrib.crossvalidation;
+package org.neuroph.contrib.crossvalidation.evaluation;
 
 import org.neuroph.core.learning.error.ErrorFunction;
 
 /**
  * Calculates scalar evaluation result using ErrorFunction
  */
-public class ErrorEvaluator implements Evaluator<Double> {
+class ErrorEvaluator implements Evaluator<Double> {
 
     private final ErrorFunction errorFunction;
 
-    public ErrorEvaluator(final ErrorFunction errorFunction) {
+    ErrorEvaluator(final ErrorFunction errorFunction) {
         this.errorFunction = errorFunction;
     }
 

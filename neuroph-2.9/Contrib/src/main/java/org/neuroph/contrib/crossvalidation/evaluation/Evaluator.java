@@ -1,11 +1,11 @@
-package org.neuroph.contrib.crossvalidation;
+package org.neuroph.contrib.crossvalidation.evaluation;
 
 /**
  * Generic interface for all types of evaluators
  *
  * @param <T> Return type of final evaluation result
  */
-public interface Evaluator<T> {
+interface Evaluator<T> {
 
     /**
      * This method should handle processing of a single network output within an evaluation procedure
