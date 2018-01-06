@@ -1,7 +1,6 @@
 package org.neuroph.contrib.crossvalidation;
 
 import org.apache.commons.lang3.SerializationUtils;
-import org.neuroph.contrib.crossvalidation.results.CrossValidationResult;
 import org.neuroph.core.NeuralNetwork;
 import org.neuroph.core.data.DataSet;
 

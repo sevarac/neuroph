@@ -1,6 +1,5 @@
 package org.neuroph.contrib.crossvalidation;
 
-import org.neuroph.contrib.crossvalidation.results.CrossValidationResult;
 import org.neuroph.core.NeuralNetwork;
 import org.neuroph.core.data.DataSet;
 
@@ -23,22 +22,18 @@ public class CrossValidation {
     public CrossValidation(NeuralNetwork neuralNetwork, DataSet dataSet, int foldCount) {
         this.neuralNetwork = neuralNetwork;
         this.numberOfFolds = foldCount;
+        dataSet.shuffle();
         this.dataSet = dataSet;
     }
 
     public Collection<CrossValidationResult> run() throws InterruptedException, ExecutionException {
-        dataSet.shuffle();
-
-        List<CrossValidationWorker> workerTasks = IntStream.range(0, numberOfFolds)
-                .mapToObj(this::createWorker)
-                .collect(Collectors.toList());
+        List<CrossValidationWorker> workerTasks = createWorkers();
 
         ExecutorService executor = Executors.newFixedThreadPool(4);
         List<Future<CrossValidationResult>> evaluationResults = executor.invokeAll(workerTasks);
         executor.shutdown();
 
         List<CrossValidationResult> results = new ArrayList<>();
-
         for (Future<CrossValidationResult> evaluationResult : evaluationResults) {
             results.add(evaluationResult.get());
         }
@@ -46,7 +41,9 @@ public class CrossValidation {
         return results;
     }
 
-    private CrossValidationWorker createWorker(int foldIndex) {
-        return new CrossValidationWorker(neuralNetwork, dataSet.splitIntoSubsets(numberOfFolds), foldIndex);
+    private List<CrossValidationWorker> createWorkers() {
+        return IntStream.range(0, numberOfFolds)
+                .mapToObj((foldIndex) -> new CrossValidationWorker(neuralNetwork, dataSet.splitIntoSubsets(numberOfFolds), foldIndex))
+                .collect(Collectors.toList());
     }
 }

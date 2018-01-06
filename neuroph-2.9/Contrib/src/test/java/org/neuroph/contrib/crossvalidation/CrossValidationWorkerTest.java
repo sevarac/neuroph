@@ -1,7 +1,6 @@
 package org.neuroph.contrib.crossvalidation;
 
 import org.junit.Test;
-import org.neuroph.contrib.crossvalidation.results.CrossValidationResult;
 import org.neuroph.core.data.DataSet;
 import org.neuroph.nnet.MultiLayerPerceptron;
 

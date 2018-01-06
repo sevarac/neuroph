@@ -1,4 +1,4 @@
-package org.neuroph.contrib.crossvalidation.results;
+package org.neuroph.contrib.crossvalidation;
 
 import org.neuroph.contrib.crossvalidation.evaluation.MeanSquaredErrorEvaluation;
 import org.neuroph.core.NeuralNetwork;
