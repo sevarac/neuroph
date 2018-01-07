@@ -30,7 +30,15 @@ public class CrossValidationResult {
 
     @Override
     public String toString() {
-//        TODO: string.format
-        return "EvaluationResult{" + "dataSet=" + testSet + ", meanSquareError=" + meanSquareError + "\r\n";
+        return new StringBuilder("=======================================")
+                .append("\n")
+                .append("Cross Validation Results for ")
+                .append(testSet.getLabel())
+                .append("\n")
+                .append("MSE = ")
+                .append(meanSquareError)
+                .append("\n")
+                .append("=======================================")
+                .toString();
     }
 }

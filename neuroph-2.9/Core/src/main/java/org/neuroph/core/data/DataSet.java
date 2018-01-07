@@ -615,7 +615,13 @@ public class DataSet implements List<DataSetRow>, Serializable { // implements
         int subsetSize = (int) Math.ceil(rows.size() / (double) numberOfSubsets);
 
         return IntStream.range(0, numberOfSubsets)
-                .mapToObj(value -> takeSubset(value * subsetSize, value * subsetSize + subsetSize))
+                .mapToObj(value -> {
+                    DataSet subset = takeSubset(value * subsetSize, value * subsetSize + subsetSize);
+
+                    subset.setLabel(String.format("Fold_%d", value));
+
+                    return subset;
+                })
                 .collect(toList());
     }
 
