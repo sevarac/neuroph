@@ -8,6 +8,7 @@ import java.net.URL;
 import java.util.concurrent.ExecutionException;
 
 public class CrossValidationWorkerTest {
+
     @Test
     public void test() throws ExecutionException, InterruptedException {
         MultiLayerPerceptron neuralNet = new MultiLayerPerceptron(4, 16, 3);

@@ -26,7 +26,7 @@ public class CrossValidation {
         this.dataSet = dataSet;
     }
 
-    public Collection<CrossValidationResult> run() throws InterruptedException, ExecutionException {
+    public List<CrossValidationResult> run() throws InterruptedException, ExecutionException {
         List<CrossValidationWorker> workerTasks = createWorkers();
 
         ExecutorService executor = Executors.newFixedThreadPool(4);
