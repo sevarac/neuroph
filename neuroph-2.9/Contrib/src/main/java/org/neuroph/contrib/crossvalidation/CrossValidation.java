@@ -42,8 +42,10 @@ public class CrossValidation {
     }
 
     private List<CrossValidationWorker> createWorkers() {
+        List<DataSet> datasetSubsets = dataSet.splitIntoSubsets(numberOfFolds);
+
         return IntStream.range(0, numberOfFolds)
-                .mapToObj((foldIndex) -> new CrossValidationWorker(neuralNetwork, dataSet.splitIntoSubsets(numberOfFolds), foldIndex))
+                .mapToObj((foldIndex) -> new CrossValidationWorker(neuralNetwork, datasetSubsets, foldIndex))
                 .collect(Collectors.toList());
     }
 }
